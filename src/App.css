@@ -1,0 +1,36 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.container{
+  background-color: #b9b9b9;
+  padding: 50px;
+  border-radius: 20px;
+}
+
+.task{
+  list-style-type: none; 
+  padding: 0;           
+  margin: 0;
+  margin-top: 10px;
+}
+.task li{
+  margin-bottom: 5px;
+}
+.donetask{
+  text-decoration: line-through;
+  background-color: #ccc;
+}
+.categories{
+  margin-top: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.categories button{
+  width: max-content;
+  margin-right: 5px;
+}
