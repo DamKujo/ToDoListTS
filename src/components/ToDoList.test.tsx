@@ -12,8 +12,8 @@ describe('ToDoList', () => {
   
       fireEvent.change(input, { target: { value: 'New Task' } });
       fireEvent.click(addButton);
-  
-      expect(screen.getByText('New Task')).toBeInTheDocument();
+
+      expect(screen.getByDisplayValue('New Task')).toBeInTheDocument();
     });
   
     it('should toggle the status of a task', () => {
@@ -24,7 +24,7 @@ describe('ToDoList', () => {
       fireEvent.change(input, { target: { value: 'Task 1' } });
       fireEvent.click(addButton);
   
-      const checkbox = screen.getByRole('checkbox');
+      const checkbox = screen.getByLabelText('Toggle task status');
       fireEvent.click(checkbox);
   
       expect(screen.getByDisplayValue('Task 1')).toHaveClass('donetask');
@@ -55,7 +55,20 @@ describe('ToDoList', () => {
   
       const deleteButton = screen.getByText('Delete');
       fireEvent.click(deleteButton);
-  
-      expect(screen.queryByText('Task 1')).not.toBeInTheDocument();
+
+      expect(screen.queryByDisplayValue('Task 1')).not.toBeInTheDocument();
+    });
+
+    it('should toggle between light and dark mode', () => {
+      render(<ToDoList />);
+
+      expect(document.documentElement).toHaveAttribute('data-theme', 'light');
+
+      const themeToggle = screen.getByLabelText('Toggle dark mode');
+      fireEvent.click(themeToggle);
+      expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
+
+      fireEvent.click(themeToggle);
+      expect(document.documentElement).toHaveAttribute('data-theme', 'light');
     });
   });
